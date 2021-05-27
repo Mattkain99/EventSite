@@ -1,0 +1,28 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/modules.xml
+/contentModel.xml
+/projectSettingsUpdater.xml
+/.idea.EventSite.iml
+# Datasource local storage ignored files
+/../../../../../../../../:\Workzone\EventSite\EventSite\back\.idea\.idea.EventSite\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+.idea/
+.vs/
+.csproj.user
+back/publish/
+back/EventSiteAPI/Properties/PublishProfiles/
+back/EventSiteAPI/Properties/launchSettings.json
+back/EventSiteAPI/.json
+back/EventSiteAPI/web.config
+
+[Oo]bj/
+[Bb]in/
+packages/
+*.user
+
+front/node_modules
