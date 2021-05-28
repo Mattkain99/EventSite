@@ -16,6 +16,7 @@ namespace EventSiteAPI.Models
         public Guid CampusId { get; set; }
         public Campus Campus { get; set; }
         public List<Event> Events { get; set; }
+        
         public List<EventReveller> EventRevellers { get; set; }
         
     }
