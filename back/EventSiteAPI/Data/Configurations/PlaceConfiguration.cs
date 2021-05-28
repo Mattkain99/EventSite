@@ -14,6 +14,7 @@ namespace EventSiteAPI.Data.Configurations
             builder.Property(p => p.Street);
             builder.Property(p => p.CityId);
             builder.HasOne(p => p.City).WithMany(c=>c.Places).HasForeignKey(p=>p.CityId);
+            builder.HasMany(p => p.Events).WithOne(e => e.Place).HasForeignKey(e => e.PlaceId); //
         }
     }
 }

@@ -9,7 +9,7 @@ namespace EventSiteAPI.Models
         public string Name { get; set; }
         public DateTime BeginTime { get; set; }
         public TimeSpan Duration { get; set; }
-        public DateTime SubscribeLimit { get; set; }
+        public DateTime SubscribeDeadline { get; set; }
         public int MaxMembers { get; set; }
         public string Infos { get; set; }
         public Status Status { get; set; }
