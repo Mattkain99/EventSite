@@ -8,7 +8,7 @@ namespace EventSiteAPI.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Place> builder)
         {
-            builder.ToTable("Place");
+            builder.ToTable("Place", schema:"EventSite");
             builder.HasKey(p => p.Id);
             builder.Property(p => p.Name);
             builder.Property(p => p.Street);

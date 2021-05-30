@@ -8,15 +8,16 @@ namespace EventSiteAPI.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Reveller> builder)
         {
-            builder.ToTable("Reveller");
+            builder.ToTable("Reveller", schema:"EventSite");
             builder.HasKey(r => r.Id);
             builder.Property(r => r.FirstName);
             builder.Property(r => r.LastName);
-            builder.Property(r => r.Phone);
-            builder.Property(r => r.Mail);
-            builder.Property(r => r.Password);
+            builder.Property(r => r.Phone);                 // A gérer plus tard , verif des données
+            builder.Property(r => r.Mail);                  //
+            builder.Property(r => r.Password);              //
             builder.Property(r => r.IsAdmin);
             builder.Property(r => r.IsActive);
+            builder.Property(r => r.CampusId);
             builder.HasOne(r => r.Campus).WithMany(c => c.Revellers).HasForeignKey(r => r.CampusId);
             builder.HasMany(r => r.Events).WithOne(e => e.Creator).HasForeignKey(e => e.CreatorId);
 

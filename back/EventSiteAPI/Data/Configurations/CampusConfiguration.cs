@@ -8,7 +8,7 @@ namespace EventSiteAPI.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Campus> builder)
         {
-            builder.ToTable("Campus");
+            builder.ToTable("Campus", schema:"EventSite");
             builder.HasKey(c => c.Id);
             builder.Property(c => c.Name);
             builder.HasMany(c => c.Events).WithOne(e => e.Campus).HasForeignKey(e => e.CampusId);

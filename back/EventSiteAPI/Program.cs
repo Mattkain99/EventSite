@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
@@ -18,6 +19,13 @@ namespace EventSiteAPI
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration(Configure)
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+
+        private static void Configure(IConfigurationBuilder builder) =>                     // décclaration de l'emplacement du fichier de config appsetting.json car                    
+            builder.SetBasePath(Directory.GetCurrentDirectory())                            // on va le ranger ailleur, mais il faut le déclarer quand même de toutes façon
+                .AddJsonFile(Path.Combine("Config", "appsettings.json"))
+                .Build();
+
     }
 }

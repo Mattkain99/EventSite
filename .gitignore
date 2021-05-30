@@ -102,3 +102,15 @@ dist
 
 # TernJS port file
 .tern-port
+
+.idea/
+.vs/
+*.csproj.user
+*.DotSettings.user
+publish/
+**/Properties/PublishProfiles/
+**/Properties/launchSettings.json
+
+[Oo]bj/
+[Bb]in/
+packages/

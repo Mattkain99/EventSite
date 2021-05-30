@@ -2,7 +2,6 @@
 
 namespace EventSiteAPI.Models
 {
-    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum Status
     {
         Created,

@@ -8,10 +8,10 @@ namespace EventSiteAPI.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<City> builder)
         {
-            builder.ToTable("City");
+            builder.ToTable("City", schema:"EventSite");
             builder.HasKey(c => c.Id);
             builder.Property(c => c.Name);
-            builder.Property(c => c.ZipCode);
+            builder.Property(c => c.ZipCode).HasColumnType("char(5)");
             builder.HasMany(c => c.Places).WithOne(p => p.City).HasForeignKey(p => p.CityId);
         }
     }
