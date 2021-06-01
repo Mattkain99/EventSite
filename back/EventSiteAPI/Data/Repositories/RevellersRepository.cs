@@ -23,12 +23,15 @@ namespace EventSiteAPI.Data.Repositories
             await _context.AddAsync(reveller);
             await _context.SaveChangesAsync();
         }
-
-        public async Task<List<EventReveller>> GetRevellerEventAsync(Guid eventId) =>
+        
+        public async Task<IReadOnlyCollection<Reveller>> GetCampusRevellerAsync(Guid campusId) =>
+            await _context.Set<Reveller>().Where(r => r.CampusId == campusId).ToListAsync();
+       
+        /* public async Task<List<EventReveller>> GetRevellerEventAsync(Guid eventId) =>
             await _context.Set<EventReveller>().Where(er => er.EventId == eventId).ToListAsync();       // A verifier, requete vers la table d'association
 
         public async Task<IReadOnlyCollection<Event>> GetCreatorEventsAsync(Guid eventId) =>
-            await _context.Set<Event>().Where(e => e.CreatorId == eventId).ToListAsync(); //tentative de bypass de la table d'association
+            await _context.Set<Event>().Where(e => e.CreatorId == eventId).ToListAsync(); //tentative de bypass de la table d'association */
 
 
 

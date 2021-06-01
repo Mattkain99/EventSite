@@ -24,11 +24,9 @@ namespace EventSiteAPI.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IReadOnlyCollection<Event>> GetCampusEventAsync(Guid campusId) =>
-            await _context.Set<Event>().Where(e => e.CampusId == campusId).ToListAsync();
+        
 
-        public async Task<IReadOnlyCollection<Reveller>> GetCampusRevellerAsync(Guid campusId) =>
-            await _context.Set<Reveller>().Where(r => r.CampusId == campusId).ToListAsync();
+        
         
         // Choix métier : on ajoute pas des reveller ou des events depuis Campus
 
