@@ -4,11 +4,12 @@ namespace EventSiteAPI.Models
 {
     public enum Status
     {
-        Created,
+        Draft,
         Open,
         Closed,
         Ongoing,
         Done,
-        Canceled
+        Canceled,
+        Archived
     }
 }
