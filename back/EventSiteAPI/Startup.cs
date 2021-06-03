@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EventSiteAPI.Data;
 using EventSiteAPI.Extensions;
+using EventSiteAPI.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -34,6 +37,13 @@ namespace EventSiteAPI
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddDefaultIdentity<Reveller>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentityServer()
+                .AddApiAuthorization<Reveller, ApplicationDbContext>();
+            services.AddAuthentication().AddIdentityServerJwt();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +56,9 @@ namespace EventSiteAPI
 
             app.UseRouting();
             app.UseCors(builder=>builder.AllowAnyOrigin()); // Bad Touch
+            app.UseAuthentication();
+            app.UseIdentityServer();
+            app.UseAuthorization();
             
             app.UseEndpoints(endpoints =>
             {

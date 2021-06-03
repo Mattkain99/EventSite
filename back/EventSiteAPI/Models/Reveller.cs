@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 
 namespace EventSiteAPI.Models
 {
-    public class Reveller
+    public class Reveller : IdentityUser
     {
         public Guid Id { get; set; }
         public string LastName { get; set; }
