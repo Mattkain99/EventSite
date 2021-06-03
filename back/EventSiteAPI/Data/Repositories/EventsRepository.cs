@@ -89,7 +89,7 @@ namespace EventSiteAPI.Data.Repositories
                 .Where(x => x.er == null || x.er.RevellerId != principal.Id)
                 .Select(x => x.e);
 
-        public async Task AddEventAsync(Event entity, Guid creatorId)
+        public async Task AddEventAsync(Event entity, string creatorId)
         {
             await _context.AddAsync(entity);
             await _context.AddAsync(new EventReveller
@@ -106,7 +106,7 @@ namespace EventSiteAPI.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddEventRevellerAsync(Guid eventId, Guid revellerId)
+        public async Task AddEventRevellerAsync(Guid eventId, string revellerId)
         {
             await _context.AddAsync(new EventReveller
             {
@@ -155,7 +155,7 @@ namespace EventSiteAPI.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<EventReveller> GetEventRevellerAsync(Guid eventId, Guid revellerId) =>
+        public async Task<EventReveller> GetEventRevellerAsync(Guid eventId, string revellerId) =>
             await _context.Set<EventReveller>()
                 .Include(er=>er.Event)
                 .ThenInclude(e=>e.EventRevellers)

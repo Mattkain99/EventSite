@@ -19,10 +19,10 @@ namespace EventSiteAPI.DTO
         public Status Status { get; set; }
 
         public bool IsSubscribed { get; set; }
-        public Guid CreatorId { get; set; }
+        public string CreatorId { get; set; }
         public string CreatorName { get; set; }
 
-        public static EventDTO FromEvent(Event eventToDTO, Guid principalId)
+        public static EventDTO FromEvent(Event eventToDTO, string principalId)
         {
             return new EventDTO
             {

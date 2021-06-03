@@ -6,12 +6,9 @@ namespace EventSiteAPI.Models
 {
     public class Reveller : IdentityUser
     {
-        public Guid Id { get; set; }
+        // Email, phone, password sont dans IdentityUser
         public string LastName { get; set; }
         public string FirstName { get; set; }
-        public string Phone { get; set; }
-        public string Mail { get; set; }
-        public string Password { get; set; }
         public bool IsAdmin { get; set; }
         public bool IsActive { get; set; }
         public Guid CampusId { get; set; }

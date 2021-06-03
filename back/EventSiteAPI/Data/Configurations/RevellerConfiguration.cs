@@ -12,9 +12,6 @@ namespace EventSiteAPI.Data.Configurations
             builder.HasKey(r => r.Id);
             builder.Property(r => r.FirstName);
             builder.Property(r => r.LastName);
-            builder.Property(r => r.Phone);                 // A gérer plus tard , verif des données
-            builder.Property(r => r.Mail);                  //
-            builder.Property(r => r.Password);              //
             builder.Property(r => r.IsAdmin);
             builder.Property(r => r.IsActive);
             builder.Property(r => r.CampusId);

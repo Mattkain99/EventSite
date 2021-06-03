@@ -19,7 +19,7 @@ namespace EventSiteAPI.Models
         public Place Place { get; set; }
         public Guid CampusId { get; set; }
         public Campus Campus { get; set; }
-        public Guid CreatorId { get; set; }
+        public string CreatorId { get; set; }
         public Reveller Creator { get; set; }
         public List<EventReveller> EventRevellers { get; set; }
         
