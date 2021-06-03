@@ -30,7 +30,7 @@ namespace EventSiteAPI.Data.Repositories
             // On génére le filtre une seule fois
             var expressionFilter = BuildQueryFilter(filter);
             // On crée une query de base que l'on va agrémenter selon les bool includeCreator / includeSubscribed / includeNotSubscribed
-            var baseQuery = _context.Set<Event>().Where(expressionFilter);
+            var baseQuery = _context.Set<Event>().Include(e => e.Creator).Where(expressionFilter);
             var principal = new Reveller(); // Temporaire le temps de gérer le principal avec Identity
 
             if (filter.IncludeCreator)
@@ -64,6 +64,7 @@ namespace EventSiteAPI.Data.Repositories
         private IQueryable<Event> IncludeSubscribedEventQuery(Reveller principal, Expression<Func<Event, bool>> expressionFilter) =>
             // Eq. SELECT * FROM Event INNER JOIN EventReveller ON Event.Id = ER.EventId AND ER.RevellerId = 4; => ou 4 est le principal.Id càd la personne connectée
             _context.Set<Event>()
+                .Include(e=>e.Creator)
                 .Where(expressionFilter)
                 .Join(
                     _context.Set<EventReveller>(),
@@ -75,6 +76,7 @@ namespace EventSiteAPI.Data.Repositories
         private IQueryable<Event> IncludeNotSubsribedQuery(Reveller principal, Expression<Func<Event, bool>> expressionFilter) =>
             // Eq. SELECT * FROM Event LEFT OUTER JOIN ER ON Event.Id = ER.EventId WHERE ER.RevellerId != principal.Id
             _context.Set<Event>()
+                .Include(e=>e.Creator)
                 .Where(expressionFilter)
                 .GroupJoin(
                     _context.Set<EventReveller>(),
@@ -164,5 +166,8 @@ namespace EventSiteAPI.Data.Repositories
             _context.Remove(eventRevellerToDelete);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<Event> GetEventToDeleteAsync(Guid eventId) =>
+            await _context.Set<Event>().FirstOrDefaultAsync(e => e.Id == eventId);
     }
 }

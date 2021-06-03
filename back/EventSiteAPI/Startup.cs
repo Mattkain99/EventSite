@@ -27,6 +27,7 @@ namespace EventSiteAPI
         {
             services.RegisterContext(_configuration);
             services.AddRepositories();
+            services.AddServices();
             services.AddControllers().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

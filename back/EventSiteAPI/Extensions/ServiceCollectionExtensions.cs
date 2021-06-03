@@ -1,6 +1,7 @@
 ﻿using EventSiteAPI.Data;
 using EventSiteAPI.Data.Repositories;
 using EventSiteAPI.Models;
+using EventSiteAPI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,12 @@ namespace EventSiteAPI.Extensions
                 .AddScoped<EventsRepository>()
                 .AddScoped<RevellersRepository>();
         }
+
+        public static IServiceCollection AddServices(this IServiceCollection services)
+        {
+            return services.AddScoped<EventsService>();
+        }
+        
         public static IServiceCollection RegisterContext(this IServiceCollection services, IConfiguration configuration)    //On fait une extension de classe
         {
             var postgresConfig = new PostgresConfiguration();

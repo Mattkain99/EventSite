@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
+using EventSiteAPI.Data;
 using EventSiteAPI.Data.Repositories;
 using EventSiteAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EventSiteAPI.Controllers
 {
