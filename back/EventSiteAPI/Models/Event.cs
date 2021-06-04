@@ -16,12 +16,12 @@ namespace EventSiteAPI.Models
         public string Infos { get; set; }
         public Status Status { get; set; }
         public Guid PlaceId { get; set; }
-        public Place Place { get; set; }
+        public Place? Place { get; set; }
         public Guid CampusId { get; set; }
-        public Campus Campus { get; set; }
+        public Campus? Campus { get; set; }
         public string CreatorId { get; set; }
-        public Reveller Creator { get; set; }
-        public List<EventReveller> EventRevellers { get; set; }
+        public Reveller? Creator { get; set; }
+        public List<EventReveller>? EventRevellers { get; set; }
         
     }
 }

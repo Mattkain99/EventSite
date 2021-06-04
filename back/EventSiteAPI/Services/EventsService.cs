@@ -11,10 +11,13 @@ namespace EventSiteAPI.Services
     public class EventsService
     {
         private readonly EventsRepository _eventsRepository;
+        private readonly IdentityService _identityService;
 
-        public EventsService(EventsRepository eventsRepository)
+        public EventsService(EventsRepository eventsRepository, IdentityService identityService)
         {
             _eventsRepository = eventsRepository;
+            _identityService = identityService;
+            
         }
 
         public async Task SubscribeEventAsync(Guid eventId)
@@ -30,7 +33,9 @@ namespace EventSiteAPI.Services
                 throw new InvalidOperationException();
             }
 
-            await _eventsRepository.AddEventRevellerAsync(eventId, new Reveller().Id);
+            var principal = await _identityService.GetPrincipalAsync();
+            
+            await _eventsRepository.AddEventRevellerAsync(eventId, principal.Id);
             if (selectedEvent.IsFull || selectedEvent.SubscribeDeadline > DateTime.Today)
             {
                 selectedEvent.Status = Status.Closed;
@@ -40,8 +45,9 @@ namespace EventSiteAPI.Services
 
         public async Task AddEventAsync(Event upcomingEvent)
         {
+            var principal = await _identityService.GetPrincipalAsync();
             upcomingEvent.Status = Status.Draft;
-            await _eventsRepository.AddEventAsync(upcomingEvent, new Reveller().Id);
+            await _eventsRepository.AddEventAsync(upcomingEvent, principal.Id);
         }
 
         public async Task UpdateEventAsync(Event modifiedEvent)
@@ -57,7 +63,8 @@ namespace EventSiteAPI.Services
 
         public async Task UnsubscribeEventAsync(Guid eventId)
         {
-            var eventRevellerToDelete = await _eventsRepository.GetEventRevellerAsync(eventId, new Reveller().Id);
+            var principal = await _identityService.GetPrincipalAsync();
+            var eventRevellerToDelete = await _eventsRepository.GetEventRevellerAsync(eventId, principal.Id);
             var currentEvent = eventRevellerToDelete.Event;
             if (eventRevellerToDelete == null || currentEvent.Status != Status.Open ||
                 (currentEvent.Status == Status.Closed && currentEvent.SubscribeDeadline > DateTime.Today))
@@ -82,7 +89,8 @@ namespace EventSiteAPI.Services
 
         public async Task<List<EventDTO>> GetFilteredEventsAsync(EventFilter filter)
         {
-            var filteredEvents = await _eventsRepository.GetEventsAsync(filter);
+            var principal = await _identityService.GetPrincipalAsync();
+            var filteredEvents = await _eventsRepository.GetEventsAsync(filter, principal.Id);
             return filteredEvents.Select(e => EventDTO.FromEvent(e, new Reveller().Id)).ToList();
         }
     }

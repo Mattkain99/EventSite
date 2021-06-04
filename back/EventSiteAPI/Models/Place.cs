@@ -9,7 +9,7 @@ namespace EventSiteAPI.Models
         public string Name { get; set; }
         public string Street { get; set; }
         public Guid CityId { get; set; }
-        public City City { get; set; }
-        public List<Event> Events { get; set; }
+        public City? City { get; set; }
+        public List<Event>? Events { get; set; }
     }
 }

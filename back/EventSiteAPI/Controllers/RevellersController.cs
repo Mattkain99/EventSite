@@ -25,7 +25,6 @@ namespace EventSiteAPI.Controllers
             await _revellersRepository.AddRevellerAsync(reveller);
             return Ok();
         }
-        
 
     }
 }

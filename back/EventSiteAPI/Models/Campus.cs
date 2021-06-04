@@ -7,7 +7,7 @@ namespace EventSiteAPI.Models
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public List<Event> Events { get; set; }
-        public List<Reveller> Revellers { get; set; }
+        public List<Event>? Events { get; set; }
+        public List<Reveller>? Revellers { get; set; }
     }
 }

@@ -25,18 +25,18 @@ namespace EventSiteAPI.Data.Repositories
                 .Include(e=>e.EventRevellers)
                 .FirstOrDefaultAsync(e => e.Id == eventId);
             
-        public async Task<IReadOnlyCollection<Event>> GetEventsAsync(EventFilter filter)
+        public async Task<IReadOnlyCollection<Event>> GetEventsAsync(EventFilter filter, string principalId)
         {
             // On génére le filtre une seule fois
             var expressionFilter = BuildQueryFilter(filter);
             // On crée une query de base que l'on va agrémenter selon les bool includeCreator / includeSubscribed / includeNotSubscribed
             var baseQuery = _context.Set<Event>().Include(e => e.Creator).Where(expressionFilter);
-            var principal = new Reveller(); // Temporaire le temps de gérer le principal avec Identity
 
+            
             if (filter.IncludeCreator)
             {
                 // On filtre sur la query de base directement
-                baseQuery.Where(e => e.CreatorId == principal.Id);
+                baseQuery.Where(e => e.CreatorId == principalId);
             }
 
             // Si on veut les event souscrit et non souscrit => on veut l'ensemble des events donc pas besoin d'appliquer les union
@@ -47,33 +47,33 @@ namespace EventSiteAPI.Data.Repositories
 
             if (filter.IncludeSubscribedEvent)
             {
-                var includeSubscribedEventQuery = IncludeSubscribedEventQuery(principal, expressionFilter);
+                var includeSubscribedEventQuery = IncludeSubscribedEventQuery(principalId, expressionFilter);
                 // Eq. SELECT * FROM Event UNION nouvelle query
                 baseQuery.Union(includeSubscribedEventQuery);
             }
 
             if (filter.IncludeNotSubscribedEvent)
             {
-                var includeNotSubscribedEventQuery = IncludeNotSubsribedQuery(principal, expressionFilter);
+                var includeNotSubscribedEventQuery = IncludeNotSubsribedQuery(principalId, expressionFilter);
                 baseQuery.Union(includeNotSubscribedEventQuery);
             }
 
             return await baseQuery.ToListAsync();
         }
 
-        private IQueryable<Event> IncludeSubscribedEventQuery(Reveller principal, Expression<Func<Event, bool>> expressionFilter) =>
+        private IQueryable<Event> IncludeSubscribedEventQuery(string principalId, Expression<Func<Event, bool>> expressionFilter) =>
             // Eq. SELECT * FROM Event INNER JOIN EventReveller ON Event.Id = ER.EventId AND ER.RevellerId = 4; => ou 4 est le principal.Id càd la personne connectée
             _context.Set<Event>()
                 .Include(e=>e.Creator)
                 .Where(expressionFilter)
                 .Join(
                     _context.Set<EventReveller>(),
-                    e => new { EventId = e.Id, RevellerId = principal.Id },
+                    e => new { EventId = e.Id, RevellerId = principalId },
                     er => new { er.EventId, er.RevellerId },
                     (e, _) => e
                 );
 
-        private IQueryable<Event> IncludeNotSubsribedQuery(Reveller principal, Expression<Func<Event, bool>> expressionFilter) =>
+        private IQueryable<Event> IncludeNotSubsribedQuery(string principalId, Expression<Func<Event, bool>> expressionFilter) =>
             // Eq. SELECT * FROM Event LEFT OUTER JOIN ER ON Event.Id = ER.EventId WHERE ER.RevellerId != principal.Id
             _context.Set<Event>()
                 .Include(e=>e.Creator)
@@ -86,7 +86,7 @@ namespace EventSiteAPI.Data.Repositories
                 .SelectMany(
                     x => x.er.DefaultIfEmpty(),
                     (x, er) => new { x.e, er })
-                .Where(x => x.er == null || x.er.RevellerId != principal.Id)
+                .Where(x => x.er == null || x.er.RevellerId != principalId)
                 .Select(x => x.e);
 
         public async Task AddEventAsync(Event entity, string creatorId)

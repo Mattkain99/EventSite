@@ -20,7 +20,8 @@ namespace EventSiteAPI.Extensions
 
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            return services.AddScoped<EventsService>();
+            return services.AddScoped<EventsService>()
+                .AddScoped<IdentityService>();
         }
         
         public static IServiceCollection RegisterContext(this IServiceCollection services, IConfiguration configuration)    //On fait une extension de classe

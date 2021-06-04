@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using EventSiteAPI.Data;
 using EventSiteAPI.Extensions;
@@ -37,13 +38,21 @@ namespace EventSiteAPI
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
+            services.AddTransient<IPrincipal>(provider => provider.GetService<IHttpContextAccessor>().HttpContext.User);
             services.AddDefaultIdentity<Reveller>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddIdentityServer()
                 .AddApiAuthorization<Reveller, ApplicationDbContext>();
             services.AddAuthentication().AddIdentityServerJwt();
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
 
+                options.LoginPath = "/identity/login";
+                options.SlidingExpiration = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

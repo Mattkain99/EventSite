@@ -12,10 +12,10 @@ namespace EventSiteAPI.Models
         public bool IsAdmin { get; set; }
         public bool IsActive { get; set; }
         public Guid CampusId { get; set; }
-        public Campus Campus { get; set; }
-        public List<Event> Events { get; set; }
+        public Campus? Campus { get; set; }
+        public List<Event>? Events { get; set; }
         
-        public List<EventReveller> EventRevellers { get; set; }
+        public List<EventReveller>? EventRevellers { get; set; }
         
     }
 }
