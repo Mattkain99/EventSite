@@ -2,12 +2,13 @@
 using System.Threading.Tasks;
 using EventSiteAPI.Data.Repositories;
 using EventSiteAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventSiteAPI.Controllers
 {
     [ApiController]
-    [Route("cities")]
+    [Route("api/cities")]
     public class CitiesController : ControllerBase
     {
         private readonly CitiesRepository _citiesRepository;

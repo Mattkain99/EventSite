@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "hnBpa4/LG78q51Y0f6UJ92RAG4gVM2KbvhUlRGXdlDppRQH/sOaET7WGqAX7hUsq82gSK1pRAZzXxpikLB5baw==",
+  "dgSpecHash": "WmuTx7jhTkzA889ClWaKG1HmXpTr3qhk89fF8DiXmCfD6JoZ3Ri+umQ6g6XYEXwa2df07Oo/twuYvTIJ2zcwAQ==",
   "success": true,
   "projectFilePath": "D:\\Workzone\\EventSite\\EventSite\\back\\EventSiteAPI\\EventSiteAPI.csproj",
   "expectedPackageFiles": [
@@ -21,6 +21,7 @@
     "C:\\Users\\Matthieu\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\5.0.6\\microsoft.aspnetcore.identity.ui.5.0.6.nupkg.sha512",
     "C:\\Users\\Matthieu\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\5.0.6\\microsoft.aspnetcore.jsonpatch.5.0.6.nupkg.sha512",
     "C:\\Users\\Matthieu\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\5.0.6\\microsoft.aspnetcore.mvc.newtonsoftjson.5.0.6.nupkg.sha512",
+    "C:\\Users\\Matthieu\\.nuget\\packages\\microsoft.aspnetcore.spaservices.extensions\\5.0.6\\microsoft.aspnetcore.spaservices.extensions.5.0.6.nupkg.sha512",
     "C:\\Users\\Matthieu\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Matthieu\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.6\\microsoft.entityframeworkcore.5.0.6.nupkg.sha512",
     "C:\\Users\\Matthieu\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.6\\microsoft.entityframeworkcore.abstractions.5.0.6.nupkg.sha512",
@@ -34,6 +35,8 @@
     "C:\\Users\\Matthieu\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\Matthieu\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\5.0.0\\microsoft.extensions.fileproviders.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\Matthieu\\.nuget\\packages\\microsoft.extensions.fileproviders.embedded\\5.0.6\\microsoft.extensions.fileproviders.embedded.5.0.6.nupkg.sha512",
+    "C:\\Users\\Matthieu\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\5.0.0\\microsoft.extensions.fileproviders.physical.5.0.0.nupkg.sha512",
+    "C:\\Users\\Matthieu\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\5.0.0\\microsoft.extensions.filesystemglobbing.5.0.0.nupkg.sha512",
     "C:\\Users\\Matthieu\\.nuget\\packages\\microsoft.extensions.http\\5.0.0\\microsoft.extensions.http.5.0.0.nupkg.sha512",
     "C:\\Users\\Matthieu\\.nuget\\packages\\microsoft.extensions.identity.core\\5.0.6\\microsoft.extensions.identity.core.5.0.6.nupkg.sha512",
     "C:\\Users\\Matthieu\\.nuget\\packages\\microsoft.extensions.identity.stores\\5.0.6\\microsoft.extensions.identity.stores.5.0.6.nupkg.sha512",

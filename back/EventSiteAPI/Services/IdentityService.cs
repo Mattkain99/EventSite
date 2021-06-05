@@ -1,5 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using EventSiteAPI.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
@@ -32,17 +37,10 @@ namespace EventSiteAPI.Services
             return result;
         }
 
-        public async Task<bool> LoginAsync(string userName, string password)
+        public async Task<SignInResult> LoginAsync(string userName, string password)
         {
-            //var result = await _signInManager.PasswordSignInAsync(userName, password, true, false);
-            var user = await _userManager.FindByEmailAsync(userName);
-            var checkedPassword = await _userManager.CheckPasswordAsync(user, password);
-            if (checkedPassword)
-            {
-                await _signInManager.SignInAsync(user, false);
-                return true;
-            }
-            return false;
+            var result = await _signInManager.PasswordSignInAsync(userName, password, true, false);
+            return result;
         }
 
         public async Task LogoutAsync()
@@ -52,7 +50,7 @@ namespace EventSiteAPI.Services
 
         public async Task<Reveller> GetPrincipalAsync()
         {
-            return await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            return await _userManager.GetUserAsync(_httpContextAccessor.HttpContext?.User);
         }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace EventSiteAPI.Models
 {
+    [Newtonsoft.Json.JsonConverter(typeof(JsonStringEnumConverter))]
     public enum Status
     {
         Draft,

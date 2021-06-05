@@ -3,13 +3,13 @@ using System.Threading.Tasks;
 using EventSiteAPI.Data.Repositories;
 using EventSiteAPI.Models;
 using EventSiteAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventSiteAPI.Controllers
 {
     [ApiController]
-    [Route("events")]
-    
+    [Route("api/events")]
     public class EventController : ControllerBase
     {
         private readonly EventsService _eventsService;

@@ -2,13 +2,14 @@
 using EventSiteAPI.Data;
 using EventSiteAPI.Data.Repositories;
 using EventSiteAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace EventSiteAPI.Controllers
 {
     [ApiController]
-    [Route("campus")]
+    [Route("api/campus")]
     public class CampusController : ControllerBase
     {
         private readonly CampusRepository _campusRepository;

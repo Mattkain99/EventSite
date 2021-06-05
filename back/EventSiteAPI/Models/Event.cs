@@ -10,7 +10,7 @@ namespace EventSiteAPI.Models
         public DateTime BeginTime { get; set; }
         public TimeSpan Duration { get; set; }
         public DateTime SubscribeDeadline { get; set; }
-        public bool IsFull => EventRevellers.Count == MaxMembers;
+        public bool IsFull => (EventRevellers?.Count ?? 0) == MaxMembers;
         
         public int MaxMembers { get; set; }
         public string Infos { get; set; }

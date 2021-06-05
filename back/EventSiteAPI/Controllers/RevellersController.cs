@@ -1,12 +1,13 @@
 ﻿using System.Threading.Tasks;
 using EventSiteAPI.Data.Repositories;
 using EventSiteAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventSiteAPI.Controllers
 {
     [ApiController]
-    [Route("revellers")]
+    [Route("api/revellers")]
     public class RevellersController : ControllerBase
     {
         private readonly RevellersRepository _revellersRepository;

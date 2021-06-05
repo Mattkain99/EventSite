@@ -2,9 +2,12 @@
 using EventSiteAPI.Data.Repositories;
 using EventSiteAPI.Models;
 using EventSiteAPI.Services;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Hosting.Internal;
 
 namespace EventSiteAPI.Extensions
 {
@@ -23,12 +26,14 @@ namespace EventSiteAPI.Extensions
             return services.AddScoped<EventsService>()
                 .AddScoped<IdentityService>();
         }
-        
-        public static IServiceCollection RegisterContext(this IServiceCollection services, IConfiguration configuration)    //On fait une extension de classe
+
+        public static IServiceCollection
+            RegisterContext(this IServiceCollection services,
+                IConfiguration configuration) //On fait une extension de classe
         {
             var postgresConfig = new PostgresConfiguration();
-            
-            configuration.GetSection("PostgreSQL").Bind(postgresConfig);        
+
+            configuration.GetSection("PostgreSQL").Bind(postgresConfig);
 
             var connectionString =
                 $"Server={postgresConfig.Server};" +
@@ -42,6 +47,15 @@ namespace EventSiteAPI.Extensions
                 options.UseNpgsql(connectionString,
                     o => o.EnableRetryOnFailure(5));
             });
+        }
+
+        public static IServiceCollection ConfigureSpa(this IServiceCollection services, IWebHostEnvironment hostEnvironment)
+        {
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "../../front/EventSite/dist/EventSite";      //Angular
+            });
+            return services;
         }
     }
 }

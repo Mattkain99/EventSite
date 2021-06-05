@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EventSiteAPI.Controllers
 {
     [ApiController]
-    [Route("identity/")]
+    [Route("api/identity/")]
     public class IdentityController : ControllerBase
     {
         private readonly IdentityService _identityService;
@@ -45,7 +45,6 @@ namespace EventSiteAPI.Controllers
         }
 
         [HttpGet("current")]
-        [Authorize]
         public async Task<IActionResult> GetCurrentAsync()
         {
             return Ok(await _identityService.GetPrincipalAsync());

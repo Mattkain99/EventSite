@@ -15,7 +15,6 @@ namespace EventSiteAPI.DTO
         public DateTime EndTime { get; set; }
         public int NbSubscribers { get; set; }
         public int MaxSubscribers { get; set; }
-        [Newtonsoft.Json.JsonConverter(typeof(JsonStringEnumConverter))]
         public Status Status { get; set; }
 
         public bool IsSubscribed { get; set; }
@@ -30,12 +29,12 @@ namespace EventSiteAPI.DTO
                 Name = eventToDTO.Name,
                 BeginTime = eventToDTO.BeginTime,
                 EndTime = eventToDTO.SubscribeDeadline,
-                NbSubscribers = eventToDTO.EventRevellers.Count,
+                NbSubscribers = eventToDTO.EventRevellers?.Count ?? 0,
                 MaxSubscribers = eventToDTO.MaxMembers,
                 Status = eventToDTO.Status,
-                IsSubscribed = eventToDTO.EventRevellers.FirstOrDefault(e => e.RevellerId == principalId) != null,
+                IsSubscribed = eventToDTO.EventRevellers?.FirstOrDefault(e => e.RevellerId == principalId) != null,
                 CreatorId = eventToDTO.CreatorId,
-                CreatorName = $"{eventToDTO.Creator.FirstName} {eventToDTO.Creator.LastName}"
+                CreatorName = $"{eventToDTO.Creator?.FirstName} {eventToDTO.Creator?.LastName}"
             };
             
             
