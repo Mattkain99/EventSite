@@ -1,0 +1,20 @@
+<div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Campus</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let camp of campus">
+      <td>{{camp.name}}</td>
+      <td></td>
+    </tr>
+    <tr>
+        <td><input [(ngModel)]="camp.name" name="name"></td>
+        <td><button (click)="create()" type="button" class="btn btn-outline-secondary">Créer</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

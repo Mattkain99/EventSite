@@ -16,7 +16,7 @@ namespace EventSiteAPI.Data.Repositories
             _context = context;
         }
 
-        public async Task<IReadOnlyCollection<City>> GetCitiesAsync() => await _context.Set<City>().ToListAsync();         //equivalent a SELECT* From City
+        public async Task<IReadOnlyCollection<City>> GetCitiesAsync() => await _context.Set<City>().Include(c => c.Places).ToListAsync();         //equivalent a SELECT* From City
 
         public async Task AddCityAsync(City city)                   // equivalent a insert into city 
         {

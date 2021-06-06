@@ -48,14 +48,5 @@ namespace EventSiteAPI.Extensions
                     o => o.EnableRetryOnFailure(5));
             });
         }
-
-        public static IServiceCollection ConfigureSpa(this IServiceCollection services, IWebHostEnvironment hostEnvironment)
-        {
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "../../front/EventSite/dist/EventSite";      //Angular
-            });
-            return services;
-        }
     }
 }

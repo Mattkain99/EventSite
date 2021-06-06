@@ -1,0 +1,27 @@
+<div>
+  <h1>Créer une sorite</h1>
+  <form>
+    <label>Nom de la sortie :</label>
+    <input [(ngModel)]="event.name" name="name" type="text"/>
+    <label>Date et heure de la sortie :</label>
+    <input [(ngModel)]="event.beginTime" name="beginTime" type="date"/>
+    <label>Date limite d'inscription :</label>
+    <input [(ngModel)]="event.subscribedDeadline" name="subscribedDeadLine" type="date"/>
+    <label>Nombre de places :</label>
+    <input [(ngModel)]="event.maxMembers" name="maxMembers" type="number"/>
+    <label>Durée :</label>
+    <input [(ngModel)]="event.duration" name="duration" type="time"/>
+    <label>Description et infos :</label>
+    <textarea [(ngModel)]="event.infos" name="infos"></textarea>
+    <label>Campus : {{!!this.event.campus ? this.event.campus.name : this.campus?.name}}</label>
+    <select [(ngModel)]="city" name="cities">
+      <option *ngFor="let city of cities" value="{{city}}" name="city">{{city.name}}</option>
+    </select>
+    <label>Lieu :</label>
+    <select [(ngModel)]="place" name="places">
+      <option *ngFor="let place of city?.places" value="{{place}}" name="place">{{place.name}}</option>
+    </select>
+    <label>Rue : {{this.place?.street}}</label>
+    <label>Code postal : {{this.city?.zipCode}}</label>
+  </form>
+</div>

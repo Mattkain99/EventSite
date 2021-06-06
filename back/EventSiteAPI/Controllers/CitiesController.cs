@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EventSiteAPI.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/cities")]
     public class CitiesController : ControllerBase
     {

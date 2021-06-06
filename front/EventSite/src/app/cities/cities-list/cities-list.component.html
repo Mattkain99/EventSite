@@ -1,0 +1,21 @@
+<div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Villes</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let city of cities">
+      <td>{{city.name}}</td>
+      <td>{{city.zipCode}}</td>
+      <td></td>
+    </tr>
+    <tr>
+        <td><input [(ngModel)]="city.name" name="name"></td>
+        <td><input [(ngModel)]="city.zipCode" name="zipCode"></td>
+        <td><button (click)="create()" type="button" class="btn btn-outline-secondary">Créer</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

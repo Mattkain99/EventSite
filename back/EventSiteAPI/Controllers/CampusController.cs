@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EventSiteAPI.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/campus")]
     public class CampusController : ControllerBase
     {

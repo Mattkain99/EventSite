@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EventSiteAPI.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/revellers")]
     public class RevellersController : ControllerBase
     {

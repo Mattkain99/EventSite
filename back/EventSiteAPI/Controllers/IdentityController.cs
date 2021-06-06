@@ -45,6 +45,7 @@ namespace EventSiteAPI.Controllers
         }
 
         [HttpGet("current")]
+        [Authorize]
         public async Task<IActionResult> GetCurrentAsync()
         {
             return Ok(await _identityService.GetPrincipalAsync());

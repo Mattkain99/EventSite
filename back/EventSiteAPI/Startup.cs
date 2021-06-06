@@ -37,8 +37,7 @@ namespace EventSiteAPI
         {
             services.RegisterContext(_configuration)
                 .AddRepositories()
-                .AddServices()
-                .ConfigureSpa(_environment);
+                .AddServices();
 
             services
                 .AddControllers()
@@ -71,6 +70,17 @@ namespace EventSiteAPI
                 options.SlidingExpiration = true;
                 options.Cookie.SameSite = SameSiteMode.None;
             });
+
+            ConfigureSpa(services);
+        }
+        
+        public static IServiceCollection ConfigureSpa(IServiceCollection services)
+        {
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "../../front/EventSite/dist/";      //Angular
+            });
+            return services;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,15 +93,16 @@ namespace EventSiteAPI
 
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseCors(builder => builder.WithOrigins("http://localhost:4200")
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials()); // Bad Touch
             app.UseAuthentication();
             app.UseIdentityServer();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            var rewriter = new RewriteOptions()
+                .AddRewrite(@"^((?!.*?\b(web$.*|api\/.*)))((\w+))*\/?(\.\w{{5,}})?\??([^.]+)?$", "index.html", true);
+            
+            app.UseRewriter(rewriter);
+            
             app.UseStaticFiles(); //Angular
             app.UseSpaStaticFiles(); //Angular
         }

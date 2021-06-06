@@ -1,0 +1,39 @@
+<div>
+  <h1>Filtrer les sorties</h1>
+  <form>
+    <label>Campus</label>
+    <select id="campus" name="campus" [(ngModel)]="filter.campusId">
+      <option *ngFor="let camp of campus" value="{{camp.id}}" [(ngModel)]="filter.campusId" name="camp">{{camp.name}}</option>
+    </select>
+    <label>Le nom de la sortie  contient : </label>
+    <input [(ngModel)]="filter.eventName" name="eventName" type="text"/>
+    <label>Entre</label>
+    <input [(ngModel)]="filter.startDate" name="startDate" type="date"/>
+    <label>et</label>
+    <input [(ngModel)]="filter.endDate" name="endDate" type="date"/>
+    <input [(ngModel)]="filter.includeCreator" name="includeCreator" type="checkbox" value="Sorties dont je suis l'organisateur/trice"/>
+    <input [(ngModel)]="filter.includeSubscribedEvent" name="includeSubscribedEvent" type="checkbox" value="Sorties auxquelles je suis inscrit/e"/>
+    <input [(ngModel)]="filter.includeNotSubscribedEvent" name="includeNotSubscribedEvent" type="checkbox" value="Sorties auxquelles je ne suis pas inscrit/e"/>
+    <input [(ngModel)]="filter.includePastEvent" name="includePastEvent" type="checkbox" value="Sorties passées"/>
+    <button (click)="refresh()" >Rechercher</button>
+  </form>
+</div>
+
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Event name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of events">
+        <td>{{e.name}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <button (click)="create()">Créer une sortie</button>
+</div>
